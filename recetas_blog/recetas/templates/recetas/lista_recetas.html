@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetas del Blog</title>
+    <link rel="stylesheet" href="{% static 'recetas/css/style.css' %}">
+</head>
+<body>
+    <h1>Recetas del Blog</h1>
+    <ul>
+        {% for receta in recetas %}
+            <li>{{ receta.titulo }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
