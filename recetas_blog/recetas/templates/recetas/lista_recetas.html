@@ -1,3 +1,4 @@
+{% extends 'recetas/base.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -8,11 +9,14 @@
     <link rel="stylesheet" href="{% static 'recetas/css/style.css' %}">
 </head>
 <body>
+
+{% block content %}
     <h1>Recetas del Blog</h1>
     <ul>
         {% for receta in recetas %}
             <li>{{ receta.titulo }}</li>
         {% endfor %}
     </ul>
+{% endblock %}
 </body>
 </html>

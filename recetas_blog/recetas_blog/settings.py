@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'recetas',  # Esta línea debe estar presente
+    'recetas',  
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
