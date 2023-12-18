@@ -10,7 +10,7 @@ urlpatterns = [
     path('', InicioView.as_view(), name='inicio'),
     path('lista/', ListaRecetasView.as_view(), name='lista_recetas'),
     path('detalle/<int:pk>/', DetalleRecetaView.as_view(), name='detalle_receta'),
-     path('crear_articulo/', CrearArticuloView.as_view(), name='crear_articulo'),
+    path('crear_articulo/', CrearArticuloView.as_view(), name='crear_articulo'),
     path('comentar_articulo/<int:articulo_id>/', comentar_articulo, name='comentar_articulo'),
     path('login/', LoginView.as_view(template_name='recetas/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='recetas/logout.html'), name='logout'),

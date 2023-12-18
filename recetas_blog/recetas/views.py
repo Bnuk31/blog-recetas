@@ -68,11 +68,6 @@ def crear_articulo(request):
 class CrearArticuloView(View):
     template_name = 'recetas/crear_articulo.html'
     form_class = TuFormularioDeCreacionDeArticulo  
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
-
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
