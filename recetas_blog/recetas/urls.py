@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ListaRecetasView, DetalleRecetaView, comentar_articulo, InicioView
+from .views import ListaRecetasView, DetalleRecetaView,InicioView, comentar_articulo
 from .views import  CrearArticuloView, SignupView
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView

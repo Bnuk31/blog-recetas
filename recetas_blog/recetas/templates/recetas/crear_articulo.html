@@ -2,7 +2,7 @@
 
 {% block content %}
   <h2>Crear Artículo</h2>
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" action="{% url 'recetas:crear_articulo' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Guardar</button>

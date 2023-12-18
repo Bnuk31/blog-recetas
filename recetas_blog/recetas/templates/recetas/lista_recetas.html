@@ -14,21 +14,21 @@
     {% block content %}
     <div class="container mt-5">
         <h1>Recetas del Blog</h1>
-        {% for receta in recetas %}
-            <div class="card mb-4">
-                <a href="{% url 'recetas:detalle_receta' receta.id %}">
-                    <img src="{% static 'recetas/images/placeholder.jpg' %}" class="card-img-top" alt="Imagen de la receta">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{% url 'recetas:detalle_receta' receta.id %}">{{ receta.titulo }}</a>
-                    </h5>
-                    <p class="card-text">{{ receta.descripcion }}</p>
-                    <a href="#" class="btn btn-primary">Ver Receta</a>
+            {% for receta in recetas %}
+                <div class="card mb-4">
+                    <a href="{% url 'recetas:detalle_receta' receta.id %}">
+                        <img src="{% static 'recetas/images/placeholder.jpg' %}" class="card-img-top" alt="Imagen de la receta">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'recetas:detalle_receta' receta.id %}">{{ receta.titulo }}</a>
+                        </h5>
+                        <p class="card-text">{{ receta.descripcion }}</p>
+                        <a href="#" class="btn btn-primary">Ver Receta</a>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-{% endblock %}
+            {% endfor %}
+        </div>
+    {% endblock %}
 </body>
 </html>
