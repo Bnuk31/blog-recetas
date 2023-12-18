@@ -1,5 +1,18 @@
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import User
 from django.db import models
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=100)
+class Articulo(models.Model):
+    titulo = models.CharField(max_length=200)
+    contenido = models.TextField()
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    autor = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='articulo_imagenes/', blank=True, null=True)
+class Comentario(models.Model):
+    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    autor = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    texto = models.TextField()
 
 
 class UsuarioManager(BaseUserManager):

@@ -1,0 +1,20 @@
+
+{% extends 'recetas/base.html' %}
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1>Bienvenido a nuestro sitio de recetas</h1>
+    <p>Explora nuestras deliciosas recetas y encuentra inspiración para tu próxima comida.</p>
+    <p>¡Esperamos que disfrutes cocinando!</p>
+    
+    <!-- Enlaces a otras secciones -->
+    <ul>
+      <li><a href="{% url 'recetas:lista_recetas' %}">Ver recetas</a></li>
+      <li><a href="{% url 'recetas:crear_articulo' %}">Crear artículo</a></li>
+      <!-- Agrega más enlaces según sea necesario -->
+    </ul>
+  </div>
+{% endblock %}
