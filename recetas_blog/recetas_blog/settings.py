@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from django.urls import reverse_lazy
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-bbbv6=caca4-20)m%@p1xtt!ueih0=*0d4zf61@nv-+fsr4vkr
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTH_USER_MODEL= 'recetas.Usuario'
 
 # Application definition
 
@@ -50,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'recetas_blog.urls'
-
+LOGIN_URL= reverse_lazy ('recetas:login')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -76,7 +78,7 @@ WSGI_APPLICATION = 'recetas_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'recetasdb',
+        'NAME': 'recetasbd',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',

@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
@@ -5,19 +6,28 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import CreateView
 from django.views.generic import DetailView  # Importa DetailView
-from .models import Receta, Articulo, Comentario
+from .models import  Articulo, Comentario
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from .forms import TuFormularioDeCreacionDeArticulo
 from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic.edit import UpdateView
+
+
 class InicioView(View):
     def get(self, request):
-        return render(request, 'recetas/inicio.html')
+        form = AuthenticationForm()
+        return render(request, 'recetas/inicio.html', {'form': form})
+    
 
 class DetalleRecetaView(DetailView):
-    model = Receta
+    model = Articulo
     template_name = 'recetas/detalle_receta.html'
     context_object_name = 'receta'
+    
+    
 class SignupView(View):
     template_name = 'recetas/signup.html'
 
@@ -52,22 +62,19 @@ class SignupView(View):
             login(request, user)
             return redirect('recetas:crear_articulo')  # Redirige a la página principal después de registrarse
         return render(request, self.template_name, {'form': form})
+    
 
 class ListaRecetasView(View):
     def get(self, request):
-        recetas = Receta.objects.all()
+        recetas = Articulo.objects.all()
         return render(request, 'recetas/lista_recetas.html', {'recetas': recetas})
+    
 
-@login_required
-def crear_articulo(request):
-    if request.user.es_colaborador:
-        # Lógica para crear un nuevo artículo
-        return render(request, 'recetas/crear_articulo.html')
-    else:
-        return redirect('recetas:lista_recetas')
+@user_passes_test(lambda u: u.is_superuser)
 class CrearArticuloView(View):
     template_name = 'recetas/crear_articulo.html'
-    form_class = TuFormularioDeCreacionDeArticulo  
+    form_class = TuFormularioDeCreacionDeArticulo 
+    success_url = reverse_lazy('recetas:lista_recetas') 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -78,6 +85,14 @@ class CrearArticuloView(View):
             articulo.save()
             return redirect('nombre_de_tu_url')
         return render(request, self.template_name, {'form': form})
+    
+
+class ArticuloUpdateView(UpdateView):
+    model = Articulo
+    fields = ["titulo",'contenido','categoria','imagen']
+    template_name = "recetas/editar_articulo.html"
+    
+    
 @login_required
 def comentar_articulo(request, articulo_id):
     # Lógica para agregar un comentario al artículo
@@ -86,7 +101,19 @@ class CrearArticuloView(CreateView):
     model = Articulo
     form_class = TuFormularioDeCreacionDeArticulo
     template_name = 'recetas/crear_articulo.html'
-    success_url = '/recetas/'
+    success_url = reverse_lazy('recetas:lista_recetas')
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            articulo = form.save(commit=False)
+            articulo.autor = self.request.user
+            articulo.save()
+            return redirect('recetas:lista_recetas')
+        return render(request, self.template_name, {'form': form})

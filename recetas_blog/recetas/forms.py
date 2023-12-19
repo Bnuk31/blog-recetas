@@ -2,11 +2,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Usuario
 from .models import Articulo
-
+from django.contrib.auth.forms import AuthenticationForm
 class TuFormularioDeCreacionDeArticulo(forms.ModelForm):
     class Meta:
         model = Articulo
-        fields = ['titulo', 'contenido', 'imagen']  # Ajusta los campos según tus modelos
+        fields = ['titulo', 'contenido','categoria', 'imagen']  # Ajusta los campos según tus modelos
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

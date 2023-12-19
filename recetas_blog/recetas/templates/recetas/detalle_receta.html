@@ -5,34 +5,7 @@
     <div class="container mt-5">
         <h1>{{ receta.titulo }}</h1>
         <img src="{% static 'recetas/images/placeholder.jpg' %}" class="img-fluid mb-4" alt="Imagen de la receta">
-        <p>{{ receta.descripcion }}</p>
+        <p>{{ receta.contenido }}</p>
 
-        <h2>Ingredientes:
-            
-            <p>Para 1 unidades
-Harina de trigo común, de todo uso : 500 g
-Agua templada: 325 ml
-Levadura fresca de panadería: 15 g
-Sal: 10 g
-Azúcar: 10 g
-Aceite de oliva virgen extra: 45 ml</p>
-
-        </h2>
-        <ul>
-            {% for ingrediente in receta.ingredientes.all %}
-                <li>{{ ingrediente.nombre }}</li>
-            {% endfor %}
-        </ul>
-
-        <h2>Introducimos el agua templada en un recipiente amplio y hondo 
-            y añadimos la levadura fresca, desmenuzada, y el azúcar.
-             Removemos hasta que el azúcar y la levadura se integren por completo.
-             Añadimos la mitad de la harina y todo el aceite. Removemos bien, 
-             procurando aplastar los grumos que se formen, y dejamos reposar durante 20 minutos a temperatura ambiente, 
-             cubriendo el recipiente con un trapo limpio. La masa crecerá ligeramente y se llenará de burbujas.
-             Transcurrido el tiempo de reposo incorporamos el resto de la harina, la sal y removemos hasta que no podamos más,
-              porque se volverá muy espesa. Espolvoreamos la superficie de trabajo con harina y volcamos la masa sobre ella. 
-              Nos engrasamos las manos con aceite y amasamos durante un par de minutos.</h2>
-        <p>{{ receta.desarrollo }}</p>
     </div>
 {% endblock %}
