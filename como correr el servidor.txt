@@ -1,0 +1,28 @@
+1er paso: clonar el repositorio
+
+git clone https://github.com/Bnuk31/blog-recetas
+
+2do paso: activar el entorno virtual
+
+cd venv/Scripts
+activate
+
+3er paso: instalar aplicaciones necesarias para correr el servidor
+
+dentro de la carpeta recetas_blog correr los siguientes comandos:
+	pip install django
+	pip install mysqlclient
+	pip install pillow
+
+4to paso: crear la base de datos en workbench
+
+dentro de workbench, crean un nuevo esquema con el nombre "recetasbd"
+
+5to paso, hacer las migraciones
+
+python manage.py makemigrations
+python manage.py migrate
+
+6to paso: correr el servidor
+
+python manage.py runserver
