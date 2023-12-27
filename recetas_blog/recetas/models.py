@@ -17,8 +17,8 @@ class Post(models.Model):
     imagen = models.ImageField(upload_to="posts")
     categoria_post = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     
-    def comentarios_realizados(self):
-        return self.comentario_set.all()
+    #def comentarios_realizados(self):
+    #    return self.comentario_set.all()
 
     def __str__(self) -> str:
         return self.titulo
@@ -29,9 +29,9 @@ class Post(models.Model):
     
 class Comentario(models.Model):
     texto = models.TextField(max_length=1000)
-    fecha_comentacion = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentario')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    usuario = models.CharField(max_length=50)
 
     def __str__(self) -> str:
         return f"{self.post} {self.texto}"

@@ -12,8 +12,10 @@
                 <li><a href="{% url 'recetas:post_realizado' %}" class="nav-link px-2 text-white">Posteos</a></li>
                 <li><a href="{% url "contactanos" %}" class="nav-link px-2 text-white">Contacto</a></li>
                 <li><a href="{% url "acerca_de" %}" class="nav-link px-2 text-white">Nosotros</a></li>
-                {% if user.is_authenticated and user.is_staff %}
+                {% if user.is_authenticated%}
                 <li><a href="{% url 'recetas:cargar_post' %}" class="nav-link px-2 text-white">Cargar Post</a></li>
+                {% endif%}
+                {% if user.is_staff %}
                 <li><a href="{% url 'admin:index' %}" class="nav-link px-2 text-white">Admin</a></li>
                 {% endif%}
             </ul>
@@ -22,13 +24,13 @@
                                     <div class="card-text">
                                         Bienvenido: {{ user.username }}
                                     </div>
-                <button type="button" class="btn btn-warning"><a href="{% url 'logout' %}"
+                <button type="button" class="btn btn-warning"><a href="{% url 'recetas:logout' %}"
                         class="nav-link px-2 text-white custom-highlight">Cerrar sesion</a></button>
                         
                 {% else %}
-                <button type="button" class="btn btn-outline-light me-2"><a href="{% url 'login' %}"
+                <button type="button" class="btn btn-outline-light me-2"><a href="{% url 'recetas:login' %}"
                         class="nav-link px-2 text-white">Iniciar sesion</a></button>
-                <button type="button" class="btn btn-warning"><a href="{% url 'recetas.usuarios:registro' %}"
+                <button type="button" class="btn btn-warning"><a href="{% url 'recetas:registro' %}"
                         class="nav-link px-2 text-white">Registro</a></button>
                 {% endif %}
             </div>

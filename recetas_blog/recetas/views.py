@@ -16,7 +16,7 @@ from django.views.generic.edit import UpdateView
 from .forms import Formulario_Modificacion, Form_Post
 from .forms import FormularioRegistro
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LogoutView
 from .models import Post, Categoria, Comentario
 def home_post(request):
@@ -48,9 +48,8 @@ def post_realizado(request):
     ctx["categorias"] = categorias
     return render(
         request,
-        
-        "posts/post.html",
-        {"ctx": ctx, "posteos": posteos, "categorias": categorias},
+        "post/post.html",
+        ctx,
     )
 
 
@@ -58,7 +57,7 @@ def post_realizado(request):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     ctx = {"post": post}
-    return render(request, "post:post_deatil.html", ctx)
+    return render(request, "post/post_detail.html", ctx)
 
 def comentar_posteo(request):
     comentario = request.POST.get("comentario", None)
@@ -68,7 +67,7 @@ def comentar_posteo(request):
     setear_comentario = Comentario.objects.create(
         usuario=usuario, post=posteo, texto=comentario
     )
-    return redirect("posts:post_detail", post_id=post)
+    return redirect("recetas:post_detail", post_id=post)
 
 class Borrar_Comentario(DeleteView):
     model = Comentario
@@ -87,7 +86,7 @@ class Cargar_Post(CreateView):
     model = Post
     template_name = "post/cargar_post.html"
     form_class = Form_Post
-    success_url = reverse_lazy("posts:post_realizado")
+    success_url = reverse_lazy("post:post_realizado")
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -112,12 +111,13 @@ def registro(request):
             formulario.save()
             nombre_usuario = formulario.cleaned_data["username"]
             messages.success(request, f"Usuario {nombre_usuario} creado!!!")
-            return redirect(reverse("posts:post_realizado"))
+            return redirect(reverse('recetas:home_post'))
     else:
         formulario = FormularioRegistro()
 
     contexto["form"] = formulario
     return render(request, "usuarios/registro.html", contexto)
+
 def login_view(request):
     # Lógica para la vista de inicio de sesión
     if request.method == 'POST':
@@ -138,4 +138,5 @@ def login_view(request):
     return render(request, 'usuarios/login.html')
 def logout_view(request):
     # Lógica adicional de ser necesario
-    return LogoutView.as_view(template_name='usuarios/logout.html')(request)
+    logout(request)
+    return render(request, 'usuarios/logout.html')

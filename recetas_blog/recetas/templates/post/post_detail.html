@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+
+{% block titulo %}
+<title>Post: detalle</title>
+{% endblock titulo %}
+
+{% block contenido %}
+
+    <div class="contenedor-imagen-posteo">
+        <img class="imagen-posteo" src="{{post.imagen.url}}" alt="nota">
+    </div>
+
+<h1 id="titulo-post">{{post.titulo}}</h1>
+<br>
+<h4 id="post-date">{{post.fecha_creacion}}</h4>
+<br>
+<p id="cuerpo-posteo">{{post.cuerpo}}</p>
+<!-- Formulario de comentarios -->
+{% if user.is_authenticated %}
+<form action="{% url 'recetas:comentar' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Dejanos tu comentario:</label>
+        <textarea name="comentario" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <input type="text" name="id_post" value="{{ post.id }}" hidden="">
+    <button type="submit" class="btn btn-primary btn-lg">Comentar </button>
+
+</form>
+{% endif %}
+<br>
+<!-- fin del form -->
+<div class="comentarios-container">
+    {% for comentario in post.comentarios_realizados %}
+    <div class="comentarios">
+        <p class="fecha">{{ comentario.fecha_comentacion }}</p>
+        <p class="usuario">{{ comentario.usuario }} comentó</p>
+        <p class="texto">{{ comentario.texto }}</p>
+        {% if user.is_authenticated and user.id == comentario.usuario_id or user.id == user.is_staff %}
+        <a class="btn btn-danger btn-lg" href="{% url 'recetas:borrar_comentario' comentario.pk %}">
+            Borrar</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'recetas:modificar_comentario' comentario.pk %}">
+            Modificar</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock contenido %}
