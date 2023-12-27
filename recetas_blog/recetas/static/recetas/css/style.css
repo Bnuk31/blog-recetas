@@ -1,40 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+.contenedor-encabezado{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    padding: 25px;
+}
+
+
+.imagen-2{
+    margin-right: 10px;
+}
+
+.cont-tex-portada{
+    margin: 150px auto;
+    width: 70%;
+}
+
+#img-tex-portada{
+    max-width: 50px;
+    float: left;
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+    margin-right: 25px;
+}
+
+#cuerpo-inicio{
+    color:#000000;
+    font-family: 'Merriweather', serif;
+    font-size: 15px;
+}
+
+#autor-text{
+    color:#000000;
+    font-weight: bold;
+    font-family: 'Merriweather', serif;
+    font-size: 15px; 
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
-    margin: 0;
-    padding: 0;
+    background-color:rgb(128, 202, 138);
+    color: rgb(0, 0, 0);
+    font-family: "Roboto", 'Times New Roman', Times, serif;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
 }
 
-h1 {
-    color: #333;
+#inicio{
+    color: rgb(235, 241, 173);
+    font-family: cursive;
     text-align: center;
-    padding: 20px;
-    background-color: #ffcc66;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px;
+.card_border{
+    border: 2px; 
+    border-radius: 10px; 
 }
 
-li {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    margin: 5px 0;
+.imagen-responsiva {
+    margin: auto;
+    border: 2px solid #ffffff; 
+    border-radius: 10px;
+}
+
+.contenedor-imagen-posteo {
+    display: flex;
+    flex-direction: column;
     padding: 10px;
-    transition: background-color 0.3s;
+    width: 600px; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
-li:hover {
-    background-color: #f2f2f2;
+.imagen-posteo {
+    width: 50%;
+    align-self: center;
+    border-radius: 10px;
 }
 
-a {
-    text-decoration: none;
+
+
+#titulo-post{
+    color: black;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 35px
+
+}
+
+#cuerpo-posteo{
+    font-family: 'Poppins', sans-serif;
+}
+
+img {
+    margin-bottom: 20px;
+
+}
+
+.comentarios {
+    margin: auto;
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
+
+.texto {
+    margin-left: 100px;
+}
+
+.usuario {
+    font-weight: bold;
+    color: blue;
+}
+
+.fecha {
+    color: slategrey;
+    font-size: small;
+}
+
+.custom-highlight{
+    font-family: "roboto", 'Times New Roman', Times, serif;
+}
+
+.dropdown{
+    margin: 1%;
+}
+
+.container li{
+    display: inline-block;
+    text-align: center;
+}
+
+.container li a:hover{
+    background: #ef8354;
+}
+
+.pie-de-pagina {
+    font-weight: bold;
+    font-size: 19px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 3em 0;
+    text-align: center;
+    background-color: #f0f0f0; 
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.card-text-post {
+    color: #000000;
+    font-family: 'Merriweather', serif;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-top: 35px; 
+    margin-bottom: 10px; 
+}
+
+.card-text-date{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+    line-height: 1.5; 
+    margin-top: 30px; 
+    margin-bottom: 10px; 
+}
+
+#post-date{
+    color: red;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+}
+
+.crear-posteo-title {
+    font-size: 25px;
     color: #333;
+    margin-bottom: 20px;
+    text-align: center; 
+    line-height: 1; 
 }
 
-a:hover {
-    color: #ff6600;
+
+#submit-postear{
+    background-color: #ffae00; 
+    color: white; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+#submit-postear:hover {
+    background-color: #45a049; 
+}
+
+.form-control {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#grupo{
+    padding: 1em 0;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-family: cursive;
+}
+.acerca_de{
+    color:#000000;
+    margin-bottom: 100px;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+}
+
+.acerca_de_contenedor {
+    width: 600px; 
+    height: 300px; 
+    margin: 90px auto 0; 
+    padding: 10px; 
+    background-color: #f0f0f0; 
+    border-radius: 10px;
 }

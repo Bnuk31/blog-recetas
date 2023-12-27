@@ -1,20 +1,27 @@
 from django.urls import path
+from django.urls import include 
+from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import *
-
-
+from . import views
+from .views import login_view
+from django.contrib.auth.views import LogoutView
+from django.conf.urls.static import static
+from recetas.views import home_post, contacto, acerca_de, login_view
 app_name ='recetas'
 
-
 urlpatterns = [
-    
-    path('lista/', ListaRecetasView.as_view(), name='lista_recetas'),
-    path('crear_articulo/', CrearArticuloView.as_view(), name='crear_articulo'),
-    path('editar_articulo/<int:pk>/', ArticuloUpdateView.as_view(), name='editar_articulo'),
-    path('detalle/<int:pk>/', DetalleRecetaView.as_view(), name='detalle_receta'),
-    path('comentar_articulo/<int:articulo_id>/', comentar_articulo, name='comentar_articulo'),
-    path('login/', LoginView.as_view(template_name='recetas/login.html'), name='login'),
-    path('logout/', LogoutView.as_view(template_name='recetas/logout.html'), name='logout'),
-    path('signup/', SignupView.as_view(), name='signup'),
+    path('', home_post, name='home_post'),
+    #path('recetas/', include(recetas, namespace='recetas')),
+    path('admin/', admin.site.urls),
+    path("home/", views.home_post, name="home_post"),
+    path("post_realizado/", views.post_realizado, name="post_realizado"),
+    path("post_detail/<int:post_id>", views.post_detail, name="post_detail"),
+    path("comentario", views.comentar_posteo, name="comentar"),
+    path("Borrar/<int:pk>", views.Borrar_Comentario.as_view(), name="borrar_comentario"),
+    path("Modificar/<int:pk>", views.Modificar_Comentario.as_view(), name="modificar_comentario"),
+    path("cargar/", views.Cargar_Post.as_view(), name="cargar_post"),
+    path("registro/", views.registro, name="registro"),
+    path("login/", login_view, name="login"),
+    path('logout/', LogoutView.as_view(template_name='usuarios/logout.html'), name='logout'),
 ]

@@ -1,19 +1,45 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Usuario
-from .models import Articulo
+from .models import User
+from .models import Comentario, Post
 from django.contrib.auth.forms import AuthenticationForm
-class TuFormularioDeCreacionDeArticulo(forms.ModelForm):
+
+
+class Formulario_Modificacion(forms.ModelForm):
     class Meta:
-        model = Articulo
-        fields = ['titulo', 'contenido','categoria', 'imagen']  # Ajusta los campos según tus modelos
+        model = Comentario
+        fields = ("texto",)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
-class RegistroForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Requerido. Ingrese una dirección de correo electrónico válida.')
+class Form_Post(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = (
+            "titulo",
+            "cuerpo",
+            "imagen",
+            "categoria_post",
+        )
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
+            'cuerpo': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+            'imagen': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'categoria_post': forms.Select(attrs={'class': 'form-control'}),
+        }
+class FormularioRegistro(UserCreationForm):
+    username = forms.CharField(
+        label="Nombre de Usuario",
+        widget=forms.TextInput(attrs={'class': 'form-control-registro'}),
+    )
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control-registro'}))
+    password1 = forms.CharField(
+        label="Contraseña",
+        widget=forms.PasswordInput(attrs={'class': 'form-control-registro'}),
+    )
+    password2 = forms.CharField(
+        label="Confirmar Contraseña", widget=forms.PasswordInput(attrs={'class': 'form-control-registro'})
+    )
 
     class Meta:
-        model = Usuario
-        fields = UserCreationForm.Meta.fields + ('email', 'es_colaborador', 'es_miembro',)
+        model = User
+        fields = ["username", "email", "password1", "password2"]

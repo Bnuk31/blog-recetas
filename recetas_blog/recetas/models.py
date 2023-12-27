@@ -5,26 +5,36 @@ from django.urls import reverse
 
 
 class Categoria(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.nombre
     
-    def __str__(self):
-        return self.nombre 
+class Post(models.Model):
+    titulo = models.CharField(max_length=355)
+    cuerpo = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    imagen = models.ImageField(upload_to="posts")
+    categoria_post = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     
-class Articulo(models.Model):
-    titulo = models.CharField(max_length=200)
-    contenido = models.TextField()
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    autor = models.ForeignKey('Usuario', on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='articulo_imagenes/', blank=True, null=True)
+    def comentarios_realizados(self):
+        return self.comentario_set.all()
+
+    def __str__(self) -> str:
+        return self.titulo
     
     def get_absolute_url(self):
-        return reverse('recetas:detalle_receta', args=[self.pk])
+        return reverse('recetas:post_detail', args=[self.pk])
     
     
 class Comentario(models.Model):
-    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
-    autor = models.ForeignKey('Usuario', on_delete=models.CASCADE)
-    texto = models.TextField()
+    texto = models.TextField(max_length=1000)
+    fecha_comentacion = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.post} {self.texto}"
 
 
 class UsuarioManager(BaseUserManager):
@@ -74,4 +84,5 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
 

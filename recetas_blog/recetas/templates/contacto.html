@@ -1,0 +1,67 @@
+{% extends "base.html"%}
+
+{% block titulo %}
+<title>Contacto</title>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-xs-12 page-content">
+            <h1 class="page-title">
+                Contacto
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="alert-msg" class="alert" style="display: none">
+<button type="button" class="close" aria-hidden="true">×</button>
+<strong></strong>
+<span></span>
+</div>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <p class="contacto-paragraph">
+                HOLA ANTE CUALQUIER CONSULTA, POR AQUI PUEDES COMUNICARTE CON NOSOTROS
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7 col-sm-12 col-xs-12">
+            <form action="" method="POST" class="contacto" method="post" >
+                <input type="hidden" name="_url" value="h">
+
+
+                <div class="col-lg-12 mb-3">
+                    <input class="form-control" placeholder="Nombre" name="nombre">
+                </div>
+                <div class="col-lg-12 mb-3">
+                    <input class="form-control" placeholder="Teléfono" name="telefono">
+                </div>
+                <div class="col-lg-12 mb-3">
+                    <input class="form-control" placeholder="E-mail" name="email">
+                </div>
+                <div class="col-lg-12 mb-3">
+                    <textarea class="form-control" rows="5" placeholder="Mensaje" name="mensaje"></textarea>
+                </div>
+                <div class="col-lg-12 text-right">
+                    <button type="submit" class="button-orange">
+                        Enviar
+                        <span id="loading" class="loading">
+                            <span class="fa fa-refresh fa-spin"></span>
+                        </span>
+                        <input type="hidden" name="_next" value="">
+                        <input type="hidden" name="_captcha" value="false">
+                    </button>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+
+{% endblock contenido %}

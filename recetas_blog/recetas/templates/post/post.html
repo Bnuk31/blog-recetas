@@ -1,0 +1,47 @@
+{% extends "base.html"%}
+
+{% block titulo %}
+<title>Recetas</title>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<!-- INICIO DROPDOWN -->
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Categorias
+  </button>
+  <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'posts:post_realizado' %}">Todas</a></li>
+      {% for categoria in categorias %}
+      <li><a class="dropdown-item" href="?id={{categoria.pk}}"> {{categoria.nombre}}</a></li>
+      {% endfor %}
+  </ul>
+</div>
+<!-- FIN DROPDOWN -->
+
+{% for post in posteos %}
+<br>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card border">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ post.imagen.url }}" class="card-img-top imagen-responsiva" alt="NohayImagen">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text-post">{{ post.cuerpo| truncatechars:140 }} <a href="{% url 'posts:post_detail' post.pk %}">Ver mas..</a></p>
+                            <p class="card-text-date"><small class="text-body-secondary">{{ post.fecha_creacion| date:"d-M-Y" }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock contenido %}
