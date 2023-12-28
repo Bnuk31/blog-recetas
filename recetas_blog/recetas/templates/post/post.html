@@ -6,7 +6,8 @@
 
 {% block contenido %}
 
-<!-- INICIO DROPDOWN -->
+<!-- INICIO DROPDOWN CATEGORIA-->
+
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       Categorias
@@ -17,8 +18,22 @@
       <li><a class="dropdown-item" href="?id={{categoria.pk}}"> {{categoria.nombre}}</a></li>
       {% endfor %}
   </ul>
+
+  <!-- FIN CATEGORIA -->
+
+  <!-- INICIO ORDEN -->
+
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Orden
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="?orden=a">A-Z</a></li>
+    <li><a class="dropdown-item" href="?orden=z">Z-A</a></li>
+    <li><a class="dropdown-item" href="?orden=asc">Mas antiguas primero</a></li>
+    <li><a class="dropdown-item" href="?orden=desc">Mas nuevas primero</a></li>
+  </ul>
 </div>
-<!-- FIN DROPDOWN -->
+<!-- FIN DROPDOWN-->
 
 {% for post in posteos %}
 <br>
