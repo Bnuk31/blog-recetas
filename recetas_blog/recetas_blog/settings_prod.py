@@ -2,6 +2,9 @@ from .settings import *
 
 DEBUG = False
 
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
