@@ -31,7 +31,8 @@
     </div>
     <div class="row">
         <div class="col-md-7 col-sm-12 col-xs-12">
-            <form action="" method="POST" class="contacto" method="post" >
+            <form action="" method="POST" class="contacto" method="post" >\
+                {% csrf_token%}
                 <input type="hidden" name="_url" value="h">
 
 

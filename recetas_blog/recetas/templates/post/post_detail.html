@@ -31,7 +31,7 @@
 <br>
 <!-- fin del form -->
 <div class="comentarios-container">
-    {% for comentario in post.comentarios_realizados %}
+    {% for comentario in post.comentario_set.all %}
     <div class="comentarios">
         <p class="fecha">{{ comentario.fecha_comentacion }}</p>
         <p class="usuario">{{ comentario.usuario }} comentó</p>

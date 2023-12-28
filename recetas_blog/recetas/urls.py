@@ -1,18 +1,12 @@
 from django.urls import path
-from django.urls import include 
-from django.contrib import admin
-from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import LoginView, LogoutView
 from . import views
-from .views import login_view
-from django.contrib.auth.views import LogoutView
-from django.conf.urls.static import static
-from recetas.views import home_post, contacto, acerca_de, login_view
+from recetas.views import home_post
+
+
 app_name ='recetas'
 
 urlpatterns = [
     path('', home_post, name='home_post'),
-    # path('admin/', admin.site.urls),
     path("home/", views.home_post, name="home_post"),
     path("post_realizado/", views.post_realizado, name="post_realizado"),
     path("post_detail/<int:post_id>", views.post_detail, name="post_detail"),

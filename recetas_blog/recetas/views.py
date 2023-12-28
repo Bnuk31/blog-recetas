@@ -18,7 +18,8 @@ from .forms import FormularioRegistro
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LogoutView
-from .models import Post, Categoria, Comentario
+from .models import *
+
 def home_post(request):
     return render(request, "inicio.html")
 
@@ -57,36 +58,40 @@ def post_realizado(request):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     ctx = {"post": post}
+    ctx['comentarios']=Comentario.objects.filter(post=post)
     return render(request, "post/post_detail.html", ctx)
 
 def comentar_posteo(request):
-    comentario = request.POST.get("comentario", None)
-    usuario = request.user
-    post = request.POST.get("id_post", None)
-    posteo = Post.objects.get(id=post)
-    setear_comentario = Comentario.objects.create(
-        usuario=usuario, post=posteo, texto=comentario
-    )
-    return redirect("recetas:post_detail", post_id=post)
+    if request.method == 'POST':
+        comentario = request.POST.get("comentario", None)
+        if comentario:
+            
+            usuario = request.user
+            post = request.POST.get("id_post", None)
+            posteo = Post.objects.get(id=post)
+            setear_comentario = Comentario.objects.create(
+                usuario=usuario, post=posteo, texto=comentario
+            )
+        return redirect("recetas:post_detail", post_id=post)
 
 class Borrar_Comentario(DeleteView):
     model = Comentario
     template_name = "comentarios/confirm_delete.html"
-    success_url = reverse_lazy("posts:post_realizado")
+    success_url = reverse_lazy("recetas:post_realizado")
 
 
 class Modificar_Comentario(UpdateView):
     model = Comentario
     form_class = Formulario_Modificacion
     template_name = "comentarios/modificar.html"
-    success_url = reverse_lazy("posts:post_realizado")
+    success_url = reverse_lazy("recetas:post_realizado")
     
 
 class Cargar_Post(CreateView):
     model = Post
     template_name = "post/cargar_post.html"
     form_class = Form_Post
-    success_url = reverse_lazy("post:post_realizado")
+    success_url = reverse_lazy("recetas:post_realizado")
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -95,9 +100,16 @@ class Cargar_Post(CreateView):
 
 
     
-    
-def contacto(request):
-    return render(request, "contacto.html")
+class Contacto(CreateView): 
+    model=Contacto
+    template_name= 'contacto.html'
+    fields=['nombre','telefono','email','mensaje']
+    success_url= reverse_lazy('recetas:home_post')
+     
+    def get_success_url(self):
+        messages.success(self.request, 'Gracias por contactarnos')
+        return super().get_success_url()
+        
 
 def acerca_de(request):
     return render(request, "acerca_de.html")

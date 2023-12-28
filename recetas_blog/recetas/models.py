@@ -17,8 +17,6 @@ class Post(models.Model):
     imagen = models.ImageField(upload_to="posts")
     categoria_post = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     
-    #def comentarios_realizados(self):
-    #    return self.comentario_set.all()
 
     def __str__(self) -> str:
         return self.titulo
@@ -60,7 +58,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     
-    # Agregar related_name para evitar conflictos
+ 
     groups = models.ManyToManyField(
         'auth.Group',
         verbose_name='groups',
@@ -85,4 +83,11 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
+
+class Contacto(models.Model):
+    nombre=models.CharField(max_length=20)
+    telefono=models.CharField(max_length=15)
+    email=models.EmailField()
+    mensaje=models.TextField(max_length=750)
+    
 
