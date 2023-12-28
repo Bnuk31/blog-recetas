@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'recetas_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'recetasbd',
+        'NAME': 'recetas_bd',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
