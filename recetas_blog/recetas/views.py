@@ -20,6 +20,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LogoutView
 from .models import *
 from django.contrib.auth.mixins import UserPassesTestMixin
+
+
 def home_post(request):
     return render(request, "inicio.html")
 

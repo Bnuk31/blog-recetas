@@ -9,6 +9,7 @@
     <br>
     <h2 class="crear-posteo-title">Crear Receta</h2>
     {% csrf_token %}
+    
     {{ form.as_p }}
     <button type="submit" id="submit-postear"> Postear Receta </button>
 </form>
