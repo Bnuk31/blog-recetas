@@ -14,4 +14,4 @@ DATABASES = {
 }
 
 ALLOWED_HOSTS = ['rodrigodg91.pythonanywhere.com',
-                'Nicou813.pythonanywhere.com']
+                'nicou813.pythonanywhere.com']
