@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{% block titulo %}
+<title>Eliminar receta</title>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<form method="POST">
+    {% csrf_token %}
+    <p>¿Desea eliminar esta receta tan deliciosa?</p>
+    {{ form }}
+    <button type="submit"> Confimar </button>
+</form>
+
+{% endblock contenido %}

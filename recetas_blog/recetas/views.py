@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LogoutView
 from .models import *
-
+from django.contrib.auth.mixins import UserPassesTestMixin
 def home_post(request):
     return render(request, "inicio.html")
 
@@ -73,21 +73,28 @@ def comentar_posteo(request):
                 usuario=usuario, post=posteo, texto=comentario
             )
         return redirect("recetas:post_detail", post_id=post)
+    
+
 
 class Borrar_Comentario(DeleteView):
     model = Comentario
     template_name = "comentarios/confirm_delete.html"
-    success_url = reverse_lazy("recetas:post_realizado")
-
+    
+    def get_success_url(self):
+        post_id=self.get_object().post.pk
+        return reverse('recetas:post_detail', args=[post_id])
 
 class Modificar_Comentario(UpdateView):
     model = Comentario
     form_class = Formulario_Modificacion
     template_name = "comentarios/modificar.html"
-    success_url = reverse_lazy("recetas:post_realizado")
+    
+    def get_success_url(self):
+        post_id=self.get_object().post.pk
+        return reverse('recetas:post_detail', args=[post_id])
     
 
-class Cargar_Post(CreateView):
+class Cargar_Post(UserPassesTestMixin, CreateView):
     model = Post
     template_name = "post/cargar_post.html"
     form_class = Form_Post
@@ -97,6 +104,26 @@ class Cargar_Post(CreateView):
         post = form.save(commit=False)
         post.usuario = self.request.user
         return super(Cargar_Post, self).form_valid(form)
+    
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class BorrarPost(UserPassesTestMixin, DeleteView):
+    model = Post
+    template_name = "post/confirm_delete_post.html"
+    success_url= reverse_lazy('recetas:post_realizado')
+    
+    def test_func(self):
+        return self.request.user.is_staff
+    
+class ModificarPost(UserPassesTestMixin, UpdateView):
+    model = Post
+    form_class = Form_Post
+    template_name = "post/modificar_post.html"
+    
+    def test_func(self):
+        return self.request.user.is_staff
 
 
     

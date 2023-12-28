@@ -27,7 +27,7 @@ class Post(models.Model):
     
 class Comentario(models.Model):
     texto = models.TextField(max_length=1000)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentario')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentarios')
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     usuario = models.CharField(max_length=50)
 

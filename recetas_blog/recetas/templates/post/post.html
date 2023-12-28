@@ -35,6 +35,20 @@
                         <div class="card-body">
                             <p class="card-text-post">{{ post.cuerpo| truncatechars:140 }} <a href="{% url 'recetas:post_detail' post.pk %}">Ver mas..</a></p>
                             <p class="card-text-date"><small class="text-body-secondary">{{ post.fecha_creacion| date:"d-M-Y" }}</small></p>
+                            {%if user.is_staff %}
+                            <a
+                            class="btn btn-danger btn-lg"
+                            href="{% url 'recetas:borrar_post' post.pk %}"
+                          >
+                            Borrar</a
+                          >
+                          <a
+                            class="btn btn-primary btn-lg"
+                            href="{% url 'recetas:modificar_post' post.pk %}"
+                          >
+                            Modificar</a
+                          >
+                            {% endif %}
                         </div>
                     </div>
                 </div>

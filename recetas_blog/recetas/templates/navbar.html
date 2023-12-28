@@ -12,10 +12,9 @@
                 <li><a href="{% url 'recetas:post_realizado' %}" class="nav-link px-2 text-white">Posteos</a></li>
                 <li><a href="{% url "contactanos" %}" class="nav-link px-2 text-white">Contacto</a></li>
                 <li><a href="{% url "acerca_de" %}" class="nav-link px-2 text-white">Nosotros</a></li>
-                {% if user.is_authenticated%}
-                <li><a href="{% url 'recetas:cargar_post' %}" class="nav-link px-2 text-white">Cargar Post</a></li>
-                {% endif%}
+                
                 {% if user.is_staff %}
+                <li><a href="{% url 'recetas:cargar_post' %}" class="nav-link px-2 text-white">Cargar Post</a></li>
                 <li><a href="{% url 'admin:index' %}" class="nav-link px-2 text-white">Admin</a></li>
                 {% endif%}
             </ul>
