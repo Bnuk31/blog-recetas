@@ -42,7 +42,7 @@
 }
 
 body {
-    background-color:rgb(128, 202, 138);
+    background-color:rgb(136, 94, 242);
     color: rgb(0, 0, 0);
     font-family: "Roboto", 'Times New Roman', Times, serif;
     display: grid;
@@ -51,7 +51,7 @@ body {
 }
 
 #inicio{
-    color: rgb(235, 241, 173);
+    color: rgb(19, 194, 200);
     font-family: cursive;
     text-align: center;
 }
@@ -77,7 +77,7 @@ body {
 }
 
 .imagen-posteo {
-    width: 50%;
+    width: 40%;
     align-self: center;
     border-radius: 10px;
 }
@@ -85,7 +85,7 @@ body {
 
 
 #titulo-post{
-    color: black;
+    color: rgb(243, 18, 63);
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 35px
@@ -137,7 +137,7 @@ img {
 }
 
 .container li a:hover{
-    background: #ef8354;
+    background: #7cf16d;
 }
 
 .pie-de-pagina {
@@ -148,7 +148,7 @@ img {
     align-items: center;
     padding: 3em 0;
     text-align: center;
-    background-color: #f0f0f0; 
+    background-color: #cf1f80; 
     width: 100%;
     box-sizing: border-box; 
 }
@@ -178,7 +178,7 @@ img {
 
 .crear-posteo-title {
     font-size: 25px;
-    color: #333;
+    color: #6004f5;
     margin-bottom: 20px;
     text-align: center; 
     line-height: 1; 
@@ -187,7 +187,7 @@ img {
 
 #submit-postear{
     background-color: #ffae00; 
-    color: white; 
+    color: #6004f5; 
     padding: 10px 20px; 
     font-size: 16px; 
     border: none; 
@@ -196,7 +196,7 @@ img {
 }
 
 #submit-postear:hover {
-    background-color: #45a049; 
+    background-color: #613cf1; 
 }
 
 .form-control {
@@ -227,6 +227,6 @@ img {
     height: 300px; 
     margin: 90px auto 0; 
     padding: 10px; 
-    background-color: #f0f0f0; 
+    background-color: #8945f5; 
     border-radius: 10px;
 }
